@@ -2,6 +2,8 @@
 
 Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) instance on [AWS](https://aws.amazon.com/) backed by an RDS PostgreSQL database for storage.
 
+![Vault architecture](https://github.com/unruly/terraform-aws-airflow/blob/master/_docs/architecture.png?raw=true)
+
 ## How to use this Module
 
 ```terraform
