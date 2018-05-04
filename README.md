@@ -21,7 +21,6 @@ module "example-airflow-setup" {
 
 Argument | Description
 --- | ---
-region | AWS region (default: us-west-2)
 ami | AMI code for the Airflow server (default: ami-a042f4d8 - CentOS 7 community image)
 instance_type | Instance type for the Airflow server (default: c3.xlarge)
 key | AWS SSH Key Pair name
