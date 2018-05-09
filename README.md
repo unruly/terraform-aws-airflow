@@ -6,9 +6,11 @@ Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) inst
 
 ## How to use this Module
 
+You can use this module from the [Terraform Registry](https://registry.terraform.io/modules/unruly/airflow/aws/)
+
 ```terraform
 module "example-airflow-setup" {
-  source            = "unruly/terraform-aws-airflow"
+  source            = "unruly/airflow/aws"
   key               = "your-aws-keypair"
   db_password       = "some-db-password"
   fernet_key        = "your-fernet-key"
@@ -17,6 +19,7 @@ module "example-airflow-setup" {
   subnet_ids        = [ "id-1", "id-2" ]
 }
 ```
+
 ## Configuration
 
 Argument | Description
@@ -29,3 +32,12 @@ vpc_id | AWS VPC in which to create the Airflow server
 security_group_id | AWS Security group in which to create the Airflow server
 db_password | Password for the PostgreSQL instance
 fernet_key | Key for encrypting data in the database - see [Airflow docs](https://airflow.apache.org/configuration.html?highlight=fernet#connections)
+
+## Outputs
+
+Output | Description
+--- | ---
+airflow_instance_public_dns | Public DNS for the Airflow instance
+airflow_instance_public_ip | Public IP address for the Airflow instance
+airflow_instance_private_ip | Private IP for the Airflow instance
+airflow_database_security_group_id | Security group id for the Airflow database
