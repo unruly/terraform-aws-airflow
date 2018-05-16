@@ -57,9 +57,13 @@ function install_python_and_python_packages() {
 
 function start_airflow() {
     mkdir -p /home/centos/airflow
+    mkdir -p /home/centos/airflow/dags
+
     mv /var/tmp/airflow.cfg /home/centos/airflow/
 
     export AIRFLOW_HOME=/home/centos/airflow
+
+    chown -R centos:centos /home/centos/airflow
 
     conda activate py34
     airflow initdb
