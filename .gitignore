@@ -1,2 +1,4 @@
 .idea/
-example/*
+example/
+.terraform/
+terraform.tfstate*

@@ -2,7 +2,7 @@
 
 Terraform module to deploy an [Apache Airflow](https://airflow.apache.org/) instance on [AWS](https://aws.amazon.com/) backed by an RDS PostgreSQL database for storage.
 
-![Vault architecture](https://github.com/unruly/terraform-aws-airflow/blob/master/_docs/architecture.png?raw=true)
+![Airflow architecture](https://github.com/unruly/terraform-aws-airflow/blob/master/_docs/architecture.png?raw=true)
 
 ## How to use this Module
 
@@ -41,3 +41,26 @@ airflow_instance_public_dns | Public DNS for the Airflow instance
 airflow_instance_public_ip | Public IP address for the Airflow instance
 airflow_instance_private_ip | Private IP for the Airflow instance
 airflow_database_security_group_id | Security group id for the Airflow database
+
+
+## Quick-start
+
+In the `./sample` directory, there is a terraform configuration file (`main.tf`) and an Airflow DAG file (`example-dag.py`).
+
+1. Set up Airflow in AWS eu-west-1
+    ```bash
+    terraform apply -var "key_name=<YOUR-AWS-KEYPAIR-NAME>"
+    ```
+2. Wait until the webserver has started - get the url for Airflow with `terraform output airflow_public_dns` and navigate to it using your browser or curl
+
+3. Copy across the example DAG to the instance
+    ```bash
+    scp -o StrictHostKeyChecking=no example-dag.py centos@$(terraform output airflow_public_dns):/home/centos/airflow/dags
+    ```
+4. Wait for Airflow to pick up the DAG and display it on the page as below 
+
+    ![Airflow page](https://github.com/unruly/terraform-aws-airflow/blob/master/_docs/airflow-page.png?raw=true)
+
+5. Congratulations, you have a running Airflow server in production!
+
+**WARNING - the database passwords and Fernet key are hardcoded in the sample configuration: do not use these in production!**
